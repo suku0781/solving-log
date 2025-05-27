@@ -56,8 +56,6 @@ class Solution4 {
              cnt++;
         }
         return cnt;
-    }
-
     int timeAdjustment(int rt) {
         return Integer.parseInt(String.format("%02d%02d", (rt / 100) / 60, (rt % 100) % 60));
     }
