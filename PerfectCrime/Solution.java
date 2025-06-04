@@ -7,21 +7,79 @@ public class Solution {
     int answer = 0;
     int a = 0;
     int b = 0;
-    int[] thiefA = new Integer()[info.length];
-    int[] thiefB = new Int()[info.length];
+    int[] thiefA = new int[info.length];
+    int[] thiefB = new int[info.length];
 
-    for(int i = 0 ; i < info.length; i++ ){
+    int[][] sortedInfo = new int[info.length][2];
+
+    // info 분리
+    for(int i = 0; i < info.length; i++){
       thiefA[i] = info[i][0];
       thiefB[i] = info[i][1];
     }
 
-    System.out.println("thiefA : " + thiefA);
-    System.out.println("thiefB : " + thiefB);
+    int thiefAMax = Arrays.stream(thiefA).max().getAsInt();
+    int thiefBMax = Arrays.stream(thiefB).max().getAsInt();
 
-    
+    // 정렬
+//    if(Arrays.stream(thiefA).sum() > Arrays.stream(thiefB).sum()) {
+//      thiefThingSort(thiefA, thiefB);
+//    } else {
+//      thiefThingSort(thiefB, thiefA);
+//    }
+
+
+    int checkCnt = info.length - 1 ; // 검증 횟수
+
+
+    // 검증
+    for(int i = 0; i < info.length; i++){
+      if(i > checkCnt){
+        if(thiefA[i] + thiefA[i + 1] > thiefB[i] + thiefB[i + 1]){
+          if(n > thiefA[i] + thiefA[i + 1]){
+            a += thiefA[i];
+          }
+
+        } else {
+          if(m > thiefB[i] + thiefB[i + 1]){
+            b += thiefB[i];
+          }
+
+        }
+        System.out.println("i : " + i + ", thiefA[i] : " + thiefA[i] + ", thiefB[i] : " + thiefB[i]);
+      }
+
+      System.out.println("a : " + a + ", b : " + b);
+    }
+
+
 
     return answer;
   }
+
+  // 정렬
+//  int[][] thiefThingSort(int[] thief, int[] targetThief) {
+//    Arrays.stream(thief).sorted();
+//
+//    for(int i = 0; i < targetThief.length; i++){
+//      int tmp = 0;
+//
+//      for(int j = 0; j < thief.length; j++){
+//        if(targetThief[i] == thief[j]) {
+//          tmp = thief[j];
+//          break;
+//        }
+//      }
+//
+//      targetThief[i] = tmp;
+//
+//
+//        sortedInfo[i][0] = 1;
+//        sortedInfo[i][1] = thiefA[i];
+//    }
+//
+//  }
+
 
   public static void main(String[] args) {
     System.out.println(new Solution().solution(new int[][]{{1, 2}, {2, 3}, {2, 1}}, 4, 4));
